@@ -8,7 +8,6 @@
     nix2container.inputs.nixpkgs.follows = "nixpkgs";
     mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
     flake-root.url = "github:srid/flake-root";
-    # agenix-shell.url = "github:aciceri/agenix-shell";
   };
 
   nixConfig = {
@@ -21,18 +20,9 @@
       imports = [
         inputs.devenv.flakeModule
         inputs.flake-root.flakeModule
-        # inputs.agenix-shell.flakeModules.default
       ];
       systems = [ "x86_64-linux" "i686-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
-      
-      # agenix-shell = {
-      #   secrets = {
-      #     ouath1_token.file = /home/ibecker/code/github/streak-tracker/secrets/ouath1_token.age;
-      #     ouath2_token.file = /home/ibecker/code/github/streak-tracker/secrets/ouath2_token.age;
-      #   };
-      #   identityPaths = [ "/home/ibecker/code/github/streak-tracker/key.txt" ];
-      #   # secretsPath = "/home/ibecker/code/github/streak-tracker/secrets";
-      # };
+
 
       perSystem = { config, self', inputs', pkgs, system, lib, ... }: {
         # Per-system attributes can be defined here. The self' and inputs'
@@ -70,12 +60,8 @@
             config.packages.default
             pkgs.python3Packages.pip
             pkgs.just
-            # pkgs.rage
           ];
 
-          # enterShell = ''
-          #   source ${lib.getExe config.agenix-shell.installationScript}
-          # '';
         };
 
       };
