@@ -1,18 +1,15 @@
-from garminconnect import (
-    Garmin,
-    GarminConnectConnectionError,
-    GarminConnectTooManyRequestsError,
-    GarminConnectAuthenticationError,
-)
-from garth.exc import GarthHTTPError
-
-from getpass import getpass
-from typing import Optional
+import argparse
 import datetime
 import logging
-import requests
 import os
-import argparse
+from getpass import getpass
+from typing import Optional
+
+import requests
+from garminconnect import (Garmin, GarminConnectAuthenticationError,
+                           GarminConnectConnectionError,
+                           GarminConnectTooManyRequestsError)
+from garth.exc import GarthHTTPError
 
 logging.basicConfig(level=logging.ERROR)
 
@@ -51,12 +48,12 @@ def did_i_run_today() -> bool | None:
         logging.debug("No token found, attempting to login")
         return None        
 
-    # Get running activities data
-    # Get current date
-    today = datetime.date.today()
+    # Get current date in USA/New York time zone
+    today = datetime.datetime.now(tz=datetime.timezone(datetime.timedelta(hours=-5)))
     
     logging.debug("Getting activities for date: {}".format(today))
 
+    # Get running activities data
     activities = garmin.get_activities_fordate(today)
     activities = activities['ActivitiesForDay']['payload']
     # Check if there are any activities
