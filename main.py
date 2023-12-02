@@ -58,7 +58,7 @@ def did_i_run_today() -> bool | None:
     activities = activities['ActivitiesForDay']['payload']
     # Check if there are any activities
     if len(activities) == 0:
-        print("No activities found")
+        logging.warn("No activities found")
         return False
 
     logging.debug("Found {} activities".format(len(activities)))
@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
     ran_today = did_i_run_today()
     if ran_today:
-        print("You ran today!")
+        logging.info("You ran today!")
     else:
-        print("You did not run today")
+        logging.warn("You did not run today")
 
