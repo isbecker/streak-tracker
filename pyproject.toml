@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "streak-tracker"
+version = "0.1.0"
+description = "Track Garmin streaks"
+authors = ["Ian Becker <ian@beckr.dev>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+garminconnect = "^0.2.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

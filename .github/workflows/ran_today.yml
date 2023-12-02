@@ -1,0 +1,32 @@
+
+name: Run Today
+
+on:
+  push:
+    branches:
+      - main
+
+# set environment variables from github secrets
+env:
+  # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # GITHUB_REPOSITORY: ${{ github.repository }}
+  # GITHUB_ACTOR: ${{ github.actor }}
+  # GITHUB_REF: ${{ github.ref }}
+  # GITHUB_SHA: ${{ github.sha }}
+  GARMIN_TOKENS: ${{ secrets.GARMIN_TOKENS }}
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v23
+      - uses: cachix/cachix-action@v12
+        with:
+          name: devenv
+      # - name: Install devenv.sh
+      #   run: nix profile install tarball+https://install.devenv.sh/latest
+
+      - name: Run a single command in the devenv shell
+        run: nix develop --impure --command just ran
