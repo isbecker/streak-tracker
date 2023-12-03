@@ -5,6 +5,10 @@ on:
   push:
     branches:
       - main
+  # run every day at 4am UTC which is 11pm EST
+  # TODO: does that work correctly for daylight savings?
+  schedule:
+    - cron: "0 4 * * *"
 
 # set environment variables from github secrets
 env:
