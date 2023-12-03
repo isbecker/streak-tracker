@@ -33,4 +33,4 @@ jobs:
 
       - name: Commit streak to GitHub if it changed
         run: |
-          git diff --quiet HEAD -- streak.txt || (git commit -m "Update streak.txt" streak.txt && git push origin main)
+          git diff --quiet HEAD -- streak.txt || (git commit -m "chore: updates streak.txt" streak.txt && git push origin main)
