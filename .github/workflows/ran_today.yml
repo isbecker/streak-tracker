@@ -31,10 +31,10 @@ jobs:
           git config --global user.email "ian@beckr.dev"
           git config --global user.name "Ian Becker"
 
-      - name: Check if I ran today and update streak.txt
+      - name: Check if I ran today and update streak.json
         run: |
           nix develop --impure --command just ran
 
       - name: Commit streak to GitHub if it changed
         run: |
-          git diff --quiet HEAD -- streak.txt || (git commit -m "chore: updates streak.txt" streak.txt && git push origin main)
+          git diff --quiet HEAD -- streak.json || (git commit -m "chore: updates streak.json" streak.json && git push origin main)

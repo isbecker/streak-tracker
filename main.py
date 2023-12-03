@@ -2,6 +2,7 @@ import argparse
 import datetime
 import logging
 import os
+import json
 from getpass import getpass
 from typing import Optional
 
@@ -80,18 +81,28 @@ def write_to_streak_file() -> None:
     """Write to a file to indicate that you ran today
     """
     today = today_in_new_york().strftime("%Y-%m-%d")
-    
-    # Check if today's date is already in the file
-    with open("streak.txt", "r") as f:
-        for line in f:
-            if today in line:
-                return
+    filename = "streak.json"
 
-    # If not, prepend today's date
-    with open("streak.txt", "r+") as f:
-        content = f.read()
-        f.seek(0, 0)
-        f.write(today + os.linesep + content)
+    # Load existing data
+    if os.path.exists(filename):
+        with open(filename, "r") as f:
+            data = json.load(f)
+        # Check if today's date is already in the file
+        if any(run["date"] == today for run in data["runs"]):
+            return
+        data["total_count"] += 1
+        data["runs"].append({"date": today})
+    else:
+        data = {
+            "total_count": 1,
+            "runs": [{"date": today}]
+        }
+
+    # Write the updated data
+    with open(filename, "w") as f:
+        json.dump(data, f, indent=4)
+
+
 
 def populate_streak_file(since: datetime.date) -> None:
     """Populate the streak file with dates since a specified date
@@ -102,12 +113,30 @@ def populate_streak_file(since: datetime.date) -> None:
     start_date = since
     end_date = datetime.datetime.now().date()
     delta = datetime.timedelta(days=1)
+    filename = "streak.json"
 
-    # Write in reverse order, with the oldest date at the bottom and the newest date at the top
-    with open("streak.txt", "a") as f:
-        while end_date >= start_date:
-            f.write(end_date.strftime("%Y-%m-%d") + os.linesep)
-            end_date -= delta
+    # Initialize data
+    data = {
+        "total_count": 0,
+        "runs": []
+    }
+
+    # If file exists, load existing data
+    if os.path.exists(filename):
+        with open(filename, "r") as f:
+            data = json.load(f)
+
+    # Populate data
+    while start_date <= end_date:
+        date_str = start_date.strftime("%Y-%m-%d")
+        if not any(run["date"] == date_str for run in data["runs"]):
+            data["total_count"] += 1
+            data["runs"].append({"date": date_str})
+        start_date += delta
+
+    # Write data to file
+    with open(filename, "w") as f:
+        json.dump(data, f, indent=4)
 
 if __name__ == "__main__":
     # Parse command line arguments
