@@ -8,12 +8,11 @@ on:
 
 # set environment variables from github secrets
 env:
-  # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  # GITHUB_REPOSITORY: ${{ github.repository }}
-  # GITHUB_ACTOR: ${{ github.actor }}
-  # GITHUB_REF: ${{ github.ref }}
-  # GITHUB_SHA: ${{ github.sha }}
   GARMIN_TOKENS: ${{ secrets.GARMIN_TOKENS }}
+
+# allow action to push to repo
+permissions:
+  contents: write
 
 jobs:
   run:
