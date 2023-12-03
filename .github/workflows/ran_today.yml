@@ -28,7 +28,7 @@ jobs:
           git config --global user.email "ian@beckr.dev"
           git config --global user.name "Ian Becker"
 
-      - name: Run a single command in the devenv shell
+      - name: Check if I ran today and update streak.txt
         run: |
           nix develop --impure --command just ran
 
