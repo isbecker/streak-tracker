@@ -1,2 +1,4 @@
 .devenv
 .direnv
+__pycache__
+.env.local
