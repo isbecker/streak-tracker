@@ -25,3 +25,5 @@ jobs:
 
       - name: Run a single command in the devenv shell
         run: nix develop --impure --command just ran
+      - name: Commit streak to GitHub
+        run: git add streak.txt && git commit -m "Update streak" && git push
