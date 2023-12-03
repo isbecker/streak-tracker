@@ -29,10 +29,9 @@ jobs:
           git config --global user.name "Ian Becker"
 
       - name: Run a single command in the devenv shell
-        run: nix develop --impure --command just ran
-
-      - name: Commit streak to GitHub
         run: |
-          git add streak.txt
-          git commit -m "Update streak"
-          git push
+          nix develop --impure --command just ran
+
+      - name: Commit streak to GitHub if it changed
+        run: |
+          git diff --quiet HEAD -- streak.txt || (git commit -m "Update streak.txt" streak.txt && git push origin main)
