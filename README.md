@@ -25,7 +25,7 @@ Otherwise, you will need to install the dependencies manually.
 This one liner will install the dependencies and drop you into a shell with them available.
 
 ```console
-nix-develop --impure
+nix develop --impure
 ```
 
 From there, you can run `just -l` to see what tasks are supported.
@@ -45,7 +45,7 @@ Once you have the login tokens, you can save them in `.env.local`. The `.envrc` 
 If you are not in the devenv shell, you can run this one-liner to login. This is how the GitHub Action works (although that doesn't use the login command; see below).
 
 ```console
-nix-develop --impure --command just login
+nix develop --impure --command just login
 ```
 
 ### Track a run
@@ -59,5 +59,5 @@ just ran
 And if you aren't in the devenv shell:
 
 ```console
-nix-develop --impure --command just ran
+nix develop --impure --command just ran
 ```
