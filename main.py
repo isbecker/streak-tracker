@@ -1,8 +1,8 @@
 import argparse
 import datetime
+import json
 import logging
 import os
-import json
 from getpass import getpass
 from typing import Optional
 
@@ -151,7 +151,14 @@ if __name__ == "__main__":
     
     if args.login:
         if tokens := logins():
-            print(tokens)  # can be piped to env var
+            print(f"""
+Login successful!
+Set the environment variable GARMIN_TOKENS to the above value to avoid logging in again.
+For example, in bash, run:
+export GARMIN_TOKENS='{tokens}'
+
+You can also add it to an .env.local file in the root of this project.
+            """.strip())
         exit(0)
     
     if args.populate:
