@@ -1,6 +1,6 @@
-![Run Streak](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fisbecker%2Fstreak-tracker%2Fmain%2Fstreak.json&query=%24.total_count&label=Run%20Streak&color=lawngreen)
-
 # Garmin Connect Streak Tracker
+
+[![Run Streak](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fisbecker%2Fstreak-tracker%2Fmain%2Fstreak.json&query=%24.total_count&suffix=%20days&style=for-the-badge&label=%F0%9F%8F%83%20Run%20Streak&color=lawngreen&link=https%3A%2F%2Fgithub.com%2Fisbecker%2Fstreak-tracker)](https://github.com/isbecker/streak-tracker)
 
 This is a simple script that allows you to login to Garmin Connect and track your current run streak.
 
@@ -11,12 +11,22 @@ Otherwise, you will need to install the dependencies manually.
 
 ## Components
 
-- nix
-  - [direnv](https://github.com/direnv/direnv)
-  - [devenv](https://devenv.sh)
+- python3
+- [poetry](https://python-poetry.org/docs/)
+
+### Optional
+
+If you want to have a simple development experience, you can install nix.
+Then, you can use the `nix develop` command to drop into a shell with all the dependencies installed.
+
+- [nix](https://nixos.org/)
+- [direnv](https://github.com/direnv/direnv)
+  - `direnv` is a shell extension that will automatically load the nix environment when you enter the directory.
+- [devenv](https://devenv.sh)
+  - `devenv` is a convenient nix-powered development environment manager.
 - [just](https://github.com/casey/just)
+  - `just` is a command runner. It is similar to `make`, but it is written in rust and has a nicer syntax.
   - run `just -l` to see what tasks are supported
-- python
 
 ## Usage
 
@@ -40,7 +50,7 @@ Assuming you are already in the nix development environment, you can run the fol
 just login
 ```
 
-Once you have the login tokens, you can save them in `.env.local`. The `.envrc` file will automatically load this file, if it exists. See `.env` for the required variables.
+Once you have the login tokens, you can save them in `.env.local`. The `.envrc` file will automatically load this file, if it exists. See [`.env`](.env) for the required variables.
 
 If you are not in the devenv shell, you can run this one-liner to login. This is how the GitHub Action works (although that doesn't use the login command; see below).
 
