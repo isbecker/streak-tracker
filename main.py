@@ -13,7 +13,6 @@ from garminconnect import (Garmin, GarminConnectAuthenticationError,
 from garth.exc import GarthHTTPError
 
 logging.basicConfig(level=logging.ERROR)
-# ***REMOVED***
 
 def logins() -> str | None:
     """Login to Garmin Connect portal and get a session token
