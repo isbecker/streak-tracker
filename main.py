@@ -183,11 +183,11 @@ def did_i_run_today() -> bool | None:
     logging.debug("Getting activities for date: {}".format(today))
 
     # Get running activities data
-    activities = garmin.get_activities_fordate(today)
+    activities = garmin.get_activities_fordate(today.isoformat())
     activities = activities['ActivitiesForDay']['payload']
     # Check if there are any activities
     if len(activities) == 0:
-        logging.warn("No activities found")
+        logging.warning("No activities found")
         return False
 
     logging.debug("Found {} activities".format(len(activities)))
@@ -298,5 +298,5 @@ You can also add it to an .env.local file in the root of this project.
         logging.info("You ran today!")
         write_to_streak_file()
     else:
-        logging.warn("You did not run today")
+        logging.warning("You did not run today")
 
